@@ -10,7 +10,7 @@ Have a look at class `DeadLetterAwareConsumer`. This class consumes messages fro
 
 2. Familiarize yourself with the configuration parameters of a dead letter queue for a channel. What properties are available? What are their defaults? (cf. [https://quarkus.io/guides/kafka](https://quarkus.io/guides/kafka))
 
-3. Implement a dead letter queue for channel `events`. The name of the dead letter queue should be `dead-letter-topic-events`. After you've successfully implemented the DLQ for this channel, the provided test cases in `DeadLetterQueueTest` should run successfully.
+3. Implement a dead letter queue for channel `events`. The name of the dead letter queue should be `dlq-events`. After you've successfully implemented the DLQ for this channel, the provided test cases in `DeadLetterQueueTest` should run successfully.
 
 4. Compare the original message with its corresponding message in the dead letter queue. What can you observe? (you can use test method `inspectOriginalAndFailedMessage` in test class `DeadLetterQueueTest`).
 
