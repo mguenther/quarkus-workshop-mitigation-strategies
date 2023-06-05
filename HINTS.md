@@ -31,7 +31,7 @@ Extend the `application.properties` by providing the correct values for the afor
 
 ```properties
 mp.messaging.incoming.events.failure-strategy=dead-letter-queue
-mp.messaging.incoming.events.dead-letter-queue.topic=dead-letter-topic-events
+mp.messaging.incoming.events.dead-letter-queue.topic=dlq-events
 ```
 
 ## Task 1.4
