@@ -1,6 +1,6 @@
-# Reactive Quarkus Workshop - Dead Letter Queue - Lab
+# Reactive Quarkus Workshop - Mitigation Strategies - Lab
 
-This repository includes the lab assignment on implementing a dead letter queue mitigation strategy for use with the SmallRye Apache Kafka Connector.
+This repository includes the lab assignment on implementing mitigation strategies for use with the SmallRye Apache Kafka Connector.
 
 ## Getting started
 
