@@ -3,8 +3,13 @@ package workshop.quarkus.reactive;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import io.smallrye.reactive.messaging.kafka.IncomingKafkaRecord;
+import io.smallrye.reactive.messaging.kafka.api.OutgoingKafkaRecordMetadata;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.apache.kafka.common.header.internals.RecordHeaders;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+
+import java.nio.charset.StandardCharsets;
 
 @ApplicationScoped
 public class DeadLetterAwareConsumer {
@@ -21,6 +26,10 @@ public class DeadLetterAwareConsumer {
                 }))
                 .onItem().invoke(message::ack)
                 .onItem().ignore().andContinueWithNull()
-                .onFailure().recoverWithUni(throwable -> Uni.createFrom().completionStage(message.nack(throwable)));
+                .onFailure().recoverWithUni(throwable -> Uni.createFrom().completionStage(message.nack(new IllegalArgumentException("I'm wrapping the cause of the error"), Metadata.of(
+                        OutgoingKafkaRecordMetadata.builder()
+                                .withKey("my-custom-key")
+                                .withHeaders(new RecordHeaders().add("warning", "Critical pressure loss!".getBytes(StandardCharsets.UTF_8)))
+                                .build()))));
     }
 }
