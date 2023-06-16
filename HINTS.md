@@ -81,11 +81,7 @@ message.nack(throwable, Metadata.of(
     .build()));
 ```
 
-## Task 2
-
-We'll discuss your design with your peers and talk about possible solutions to the problem.
-
-## Task 3.1
+## Task 2.1
 
 There is no error with the code per se, but it can lead to undesired results due to the use of the `@Retry` annotation in conjunction with reactive messaging.
 
@@ -98,7 +94,7 @@ Observations:
 
 While there is no syntax error, the `@Retry` annotation might not behave as you would expect. The retry mechanism will kick in only if an exception is thrown during the **subscription** to the stream. In the case of a failure during the **processing** of a specific message (i.e., when `IllegalArgumentException` is thrown), the stream will be considered as failed, and no further processing will occur.
 
-## Task 3.2
+## Task 2.2
 
 The `@Retry` annotation from MicroProfile Fault Tolerance and the retry mechanism from Mutiny both aim to provide retry capabilities, but they do it in slightly different contexts.
 
@@ -110,7 +106,7 @@ Mixing both in the same reactive pipeline can lead to confusion and unexpected b
 
 So, in general, it is recommended to stick with one or the other based on the programming model you are working with. If you are working with reactive streams (i.e., methods returning `Uni` or `Multi`), using Mutiny's built-in failure recovery mechanisms would be the more suitable choice.
 
-## Task 3.3
+## Task 2.3
 
 The following implementation integrates the retry mechanism from Mutiny properly into the reactive pipeline.
 
