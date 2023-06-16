@@ -20,13 +20,7 @@ Have a look at class `DeadLetterAwareConsumer`. This class consumes messages fro
 
 7. Is it possible to alter the headers of the message that goes into the dead letter queue?
 
-## Task #2: Sequenced Dead Letter Queue
-
-We've talked a bit about use cases that require to thread or sequence messages that go into a DLQ. How would you implement such a sequenced DLQ? If it helps, start simple and restrict the number of application instances to 1. What do you need to consider if you want to implement the sequenced DLQ in a truly distributed setting with multiple application instances per service? 
-
-This won't be a coding exercise, but rather a design discussion.
-
-## Task #3: Retries
+## Task #2: Retries
 
 Retries are a way to deal with transient errors. They are best applied for messages that can be processed in isolation, and thus, don't have any dependencies on their order of consumption. Have a look at class `RetryingConsumer`. This class consumes messages from topic `retries`. The message structure is the same as in task 1. For every message received, the `RetryingConsumer` flips a coin to decide whether to process it correctly.
 
